@@ -1,0 +1,354 @@
+GPT 5.1
+Chat history
+
+You said:
+I want to be able to test UI interactions in both Yew-based Rust front-ends (React-like) in a way similar to the jest test library for React.js.  I want my test framework to use Rust/WASM (with minimal-to-no JavaScript, no TypeScript, no Python).  If jest is open source and has a decent license, I'd like to port it to Rust.  Which license does it use, and how feasible is it to port? Would it be better/easier/faster to create a look-alike Rust test library from scratch (i.e., ignore the implementation, and recreate, from scratch, a subset of features (a clean-room, Chinese-wall, approach).  I'd like my library to be open source under an MIT license if possible.  What are my options?
+ChatGPT said:
+Below is a structured, step-by-step analysis of your requirements, architectural constraints, licensing questions, and the feasibility of porting, re-implementing, or clean-room cloning Jest–style UI test infrastructure for Rust + Yew + WASM.
+
+1. Restating Requirements
+You want a UI interaction test framework for:
+
+Yew front-ends (React-like virtual DOM in Rust)
+
+Rust/WASM runtime (no JS, no TS, no Python)
+
+Minimal JS glue only where absolutely required by wasm-bindgen
+
+Preferably MIT-licensed
+
+Behaviorally similar to Jest:
+
+Test runners
+
+Assertions
+
+DOM simulation / virtual DOM inspection
+
+Component mount / render lifecycle
+
+Synthetic events
+
+Async test support
+
+Snapshot-ish testing (optional)
+
+You want to determine whether to:
+
+Port Jest (license + feasibility)
+
+Clean-room rewrite a Jest-like API in Rust
+
+Build a Rust-native Yew testing framework optimized for WASM
+
+Select or extend an existing Rust WASM test framework
+
+Release everything under MIT
+
+2. Jest Licensing & Implications for Porting
+✔ Jest License
+Jest is licensed under MIT.
+
+Here is the relevant line from its GitHub repository (facebook/jest):
+
+MIT License
+Copyright (c) Meta Platforms, Inc. and affiliates.
+
+✔ Implications for You
+MIT is very permissive:
+
+You may copy, modify, distribute, relicense, including under MIT
+
+You may port the code to another language
+
+You must keep the copyright notice in the distributed codebase if any identifiable code is reused
+
+You may also produce a clean-room reimplementation without any such requirement
+
+✔ BUT: Practical Constraints
+Jest is:
+
+~300k LOC JS + TS
+
+Deeply tied to Node.js, NPM, JS semantics, and a plugin ecosystem
+
+Dependent on:
+
+Node FS
+
+Node modules resolver
+
+Babel & transforms
+
+jsdom
+
+Modules mocking system
+
+Snapshot serializer plumbing
+
+TS support
+
+Watch mode
+
+Fake timers
+
+VM sandboxing
+
+Porting Jest is NOT feasible.
+You would spend years recreating JS semantics in Rust, just to support a testing library whose core abstractions assume JavaScript.
+
+So even though the license allows it, porting Jest = architectural mismatch + enormous scope + no benefit for Yew.
+
+3. Better Architectural Approach
+A Jest-like API for Yew should be a Rust-first testing framework, not a port.
+
+Core goals should be:
+A. Rust-native test runner
+Use:
+
+wasm-bindgen-test
+
+or your own minimal runner
+
+or cargo test --target wasm32-unknown-unknown
+
+B. Virtual DOM + mount utilities
+Yew’s VDOM and component API can be driven similarly to Testing Library for React:
+
+let rendered = render_html! {
+    <MyComponent prop="value" />
+};
+
+rendered.trigger("click", "#button-id");
+
+assert_eq!(rendered.text("#output"), "Hello!");
+C. Synthetic events
+You generate DOM events in WASM:
+
+click
+
+input
+
+change
+
+keydown
+
+custom events
+
+D. DOM inspection API
+You do not need jsdom; the testing runs in a browser-like WASM runtime:
+
+web_sys DOM nodes
+
+Yew component tree access
+
+Inspection helpers like get_by_text, get_by_label, etc.
+
+E. Async scenarios
+You need to support effects, futures, timers.
+
+4. Should You Clean-Room / Reimplement a Subset?
+Yes. A clean-room design is:
+
+✔ Legally clean
+MIT allows porting, but clean-room means:
+
+Your code is wholly original
+
+You only emulate behavior and API style
+
+No code-level obligations
+
+You may release under MIT
+
+✔ Architecturally correct
+You're designing a test framework specifically for Rust/WASM—not trying to force a JavaScript test framework into Rust.
+
+✔ Much faster
+The entire MVP is maybe 1–2 months for basic functionality, not multiple years.
+
+5. Feasibility Breakdown
+❌ Porting Jest directly
+Feasibility: 5%
+The dependency chain is too JS-centric. You’d be reimplementing Node, Babel, jsdom, V8 semantics, module mocking, and huge internal machinery.
+
+✔ Clean-room Jest-like API
+Feasibility: 85%
+Much easier: replicate Jest’s developer ergonomics, not its internals.
+
+✔ Native Yew Testing Framework
+Feasibility: 95%
+Perfect match for your architecture.
+
+✔ Minimal JS (only wasm-bindgen glue)
+Achievable.
+
+6. Recommended Architecture for a Yew UI Test Framework
+Layer 1 — Test Runner
+Build on wasm-bindgen-test (browser-based)
+
+Or implement a standalone WASM test runner:
+
+loads WASM
+
+enumerates test functions via a registration macro
+
+executes in a browser or headless browser
+
+Layer 2 — Render Utilities
+Build a render_component! macro or function:
+
+let ctx = render::<MyComponent>(props);
+Layer 3 — DOM Query API
+Inspired by React Testing Library:
+
+get_by_text
+
+get_by_role
+
+get_by_label_text
+
+query_selector
+
+inner_html
+
+text_content
+
+Layer 4 — Event Simulation
+Use web_sys:
+
+ctx.click("#submit");
+ctx.input("#field", "hello");
+ctx.key_press("#name", "Enter");
+Layer 5 — Snapshot Testing (optional)
+Text-based VDOM diff stored in /tests/snapshots/.
+
+Layer 6 — Component Introspection
+Optional: allow validating Yew component state if safe.
+
+7. Existing Rust Tools You Can Reuse or Extend
+These are not perfect, but you can draw from them:
+
+### 🦀 wasm-bindgen-test
+Core test framework for WASM
+
+Integrates with cargo test
+
+You can layer your testing library on top of this
+
+🦀 yew::Renderer and yew::ServerRenderer
+Helps mount components
+
+🦀 gloo (for timers/events)
+Minimal JS but safe wrappers
+
+🦀 web-sys / js-sys
+DOM access without writing JS
+
+You would not need anything outside Rust + minimal JS glue.
+
+8. Recommended Options (Ranked)
+Option 1: Build a new Rust-native Jest-like library for Yew (recommended)
+MIT license
+
+Minimal JS
+
+Rust/WASM test runner
+
+Rust-based VDOM testing API
+
+Async tests
+
+Event simulation
+
+Snapshot testing
+
+This is clean, fast, and architecturally natural.
+
+Option 2: Clean-room subset of Jest’s behavior
+Use Jest's API style
+
+Not its internals
+
+All Rust implementation
+
+MIT license is fine
+
+Better developer ergonomics for React/Yew users.
+
+Option 3: Attempt to port Jest
+I recommend against it:
+
+Mind-bogglingly complex
+
+Wrong technology base
+
+Requires Node feature parity
+
+9. Final Recommendation
+Given your Rust-centric, WASM-centric, TDD workflow and desire to avoid JavaScript/TypeScript:
+
+✔ Build a Yew Native Test Framework in Rust
+✔ Use a clean-room API inspired by Jest
+✔ Release under MIT
+✔ Reuse:
+wasm-bindgen-test
+
+web_sys
+
+yew::Renderer
+
+This gives you:
+
+A clean, maintainable architecture
+
+No licensing issues
+
+No JS dependency hell
+
+Perfect match for Yew
+
+Ability to extend for WASM-specific UI testing patterns
+
+Test ergonomics similar to Jest (snapshots, assertions, render helpers)
+
+10. If you want, I can generate:
+The initial Cargo workspace structure
+
+A MVP design document
+
+A Rust trait/interface design for:
+
+TestContext
+
+RenderHandle
+
+Query API
+
+Event simulation
+
+A macro design (render!, test!, etc.)
+
+A prototype implementation with:
+
+Mounting
+
+Querying
+
+Simulated events
+
+Async test support
+
+Example tests for Yew components
+
+Integration with your Rust microservices and CI/CD pipeline
+
+A full clean-room process definition to keep licensing clean
+
+Just tell me how deep you want to go next.
+
+
+
+No file chosenNo file chosen
+ChatGPT can make mistakes. Check important info.
+
