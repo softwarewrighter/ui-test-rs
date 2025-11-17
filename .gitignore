@@ -1,1 +1,22 @@
-/target
+# Rust build artifacts
+/target/
+Cargo.lock
+
+# Backup files
+**/*.rs.bk
+*.pdb
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+*.profraw
+*.profdata
