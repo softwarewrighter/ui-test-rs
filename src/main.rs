@@ -3,6 +3,24 @@
 use clap::Parser;
 use std::path::PathBuf;
 
+const VERSION: &str = concat!(
+    env!("CARGO_PKG_VERSION"),
+    "\n",
+    "Copyright (c) 2025 Michael A Wright\n",
+    "License: MIT (https://opensource.org/licenses/MIT)\n",
+    "Repository: ",
+    env!("CARGO_PKG_REPOSITORY"),
+    "\n",
+    "Build Host: ",
+    env!("BUILD_HOST"),
+    "\n",
+    "Build Commit: ",
+    env!("BUILD_COMMIT"),
+    "\n",
+    "Build Time: ",
+    env!("BUILD_TIME")
+);
+
 const AI_INSTRUCTIONS: &str = r#"
 AI CODING AGENT INSTRUCTIONS:
 
@@ -39,7 +57,7 @@ https://github.com/softwarewrighter/ui-test-rs
 #[derive(Parser)]
 #[command(
     name = "ui-test-rs",
-    version,
+    version = VERSION,
     about = "CLI tool for UI testing with Playwright MCP integration",
     long_about = "A Rust-based CLI tool for UI testing that integrates with Playwright MCP \
                   for browser automation. It provides a clean, efficient interface for \

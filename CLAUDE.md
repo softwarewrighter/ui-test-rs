@@ -24,18 +24,34 @@ The system follows a layered architecture:
 - Element selection: Accessibility tree (not pixel-based)
 - Test discovery: Convention-based (*_test.rs pattern)
 
+## CRITICAL: Always Use Scripts
+
+**ALWAYS use scripts in `./scripts/` for all build and operational commands.**
+
+This ensures:
+- Reproducible builds with proper metadata (build host, commit, timestamp)
+- Consistent environment setup
+- Detection of script regressions through regular use
+- Documentation of operational procedures
+
+**If the command you need is not in `./scripts/`, create a script for it before running.**
+
+Available scripts:
+- `./scripts/build-all.sh [dev|release]` - Build with metadata (default: release)
+
 ## Build and Test Commands
 
 ### Building
 ```bash
-# Development build
-cargo build
+# ALWAYS use the build script (captures build metadata)
+./scripts/build-all.sh          # Release build (default)
+./scripts/build-all.sh release  # Explicit release build
+./scripts/build-all.sh dev      # Development build
 
-# Release build
-cargo build --release
+# Install locally after building
+./scripts/build-all.sh && sw-install -p .
 
-# Install locally using sw-install
-cargo build --release && sw-install -p .
+# NEVER use cargo build directly - always use ./scripts/build-all.sh
 ```
 
 ### Testing
@@ -76,6 +92,9 @@ sw-checklist .
 **CRITICAL**: Before EVERY commit, run these steps in order. ALL must pass:
 
 ```bash
+# 0. Build with metadata (ALWAYS use the script)
+./scripts/build-all.sh
+
 # 1. Tests
 cargo test
 
@@ -88,10 +107,13 @@ cargo fmt --all
 # 4. Markdown validation
 markdown-checker -f "**/*.md"
 
-# 5. Update status
+# 5. Project standards validation
+sw-checklist .
+
+# 6. Update status
 # Edit docs/status.md with current progress
 
-# 6. Commit and push immediately
+# 7. Commit and push immediately
 git add -A
 git commit -m "type: description
 

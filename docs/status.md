@@ -3,8 +3,8 @@
 ## Project: ui-test-rs
 
 **Version**: 0.1.0-dev
-**Last Updated**: 2025-11-16
-**Current Phase**: Phase 1 - Foundation
+**Last Updated**: 2025-11-17
+**Current Phase**: Phase 1 - Foundation (Enhanced)
 
 ## 1. Overall Progress
 
@@ -77,6 +77,12 @@ Phase 5: Polish             [............................] 0%
 - Code properly formatted
 - CLI includes AI Coding Agent Instructions in extended help
 - Basic error types defined for future use
+- **Enhanced Build System (2025-11-17)**:
+  - Added build.rs to capture build metadata (host, commit, timestamp)
+  - Created ./scripts/build-all.sh for reproducible builds
+  - Updated CLAUDE.md to enforce script usage for all builds
+  - All sw-checklist requirements now pass (13/13)
+  - Version output includes: Copyright, License, Repository, Build Host, Build Commit, Build Time
 - Ready to begin Phase 2 (Configuration and Test Discovery)
 
 ## 3. Phase 2: Core Functionality (Not Started)
@@ -221,7 +227,7 @@ None yet
 
 **Milestone 1: CLI Basics**
 - Target: 2025-11-17
-- Status: ✅ COMPLETE
+- Status: COMPLETE
 - Criteria: Help/version working, passes sw-checklist
 - Actual completion: 2025-11-17
 

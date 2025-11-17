@@ -18,3 +18,7 @@ thiserror = "1.0"
 [dev-dependencies]
 assert_cmd = "2.0"
 predicates = "3.0"
+
+[build-dependencies]
+hostname = "0.4"
+chrono = "0.4"
