@@ -19,24 +19,24 @@ This guide covers building, testing, and contributing to ui-test-rs.
 ```mermaid
 graph TB
     subgraph Core["Core Requirements"]
-        Rust[Rust Toolchain<br/>Edition 2021+]
-        Cargo[Cargo<br/>Package Manager]
+        Rust[Rust Toolchain Edition 2021+]
+        Cargo[Cargo Package Manager]
     end
 
     subgraph DevTools["Development Tools"]
-        Clippy[cargo clippy<br/>Linting]
-        Fmt[cargo fmt<br/>Formatting]
+        Clippy[cargo clippy Linting]
+        Fmt[cargo fmt Formatting]
     end
 
     subgraph CustomTools["Custom Tools"]
-        MD[markdown-checker<br/>Doc Validation]
-        CL[sw-checklist<br/>Standards Validation]
-        SI[sw-install<br/>Binary Installation]
+        MD[markdown-checker Doc Validation]
+        CL[sw-checklist Standards Validation]
+        SI[sw-install Binary Installation]
     end
 
     subgraph Runtime["Runtime Dependencies"]
-        Node[Node.js v20+<br/>Playwright MCP]
-        PW[Playwright MCP<br/>@playwright/mcp]
+        Node[Node.js v20+ Playwright MCP]
+        PW[Playwright MCP @playwright/mcp]
     end
 
     Core --> DevTools
@@ -107,7 +107,7 @@ sw-install --version
 flowchart TB
     Script[./scripts/build-all.sh]
 
-    Meta[Capture Build Metadata<br/>• Host<br/>• Commit<br/>• Timestamp]
+    Meta[Capture Build Metadata • Host • Commit • Timestamp]
     Env[Set Environment Variables]
     Build[Run Cargo Build]
     Verify[Verify Build Success]
@@ -206,9 +206,9 @@ cargo test -- --test-threads=1 --nocapture
 ```mermaid
 graph TB
     subgraph UnitTests["Unit Tests (in source files)"]
-        Config[config.rs<br/>#[cfg(test)] mod tests]
-        Loader[loader.rs<br/>#[cfg(test)] mod tests]
-        Reporter[reporter.rs<br/>#[cfg(test)] mod tests]
+        Config[config.rs #[cfg(test)] mod tests]
+        Loader[loader.rs #[cfg(test)] mod tests]
+        Reporter[reporter.rs #[cfg(test)] mod tests]
     end
 
     subgraph IntegrationTests["Integration Tests (tests/ directory)"]
@@ -292,7 +292,7 @@ graph TB
     Clippy[cargo clippy]
 
     subgraph Rules["Clippy Rules"]
-        Warn[Warnings → Errors<br/>-D warnings]
+        Warn[Warnings → Errors -D warnings]
         Unused[No unused imports]
         Needless[No needless borrows]
         Format[Inline format args]
@@ -300,7 +300,7 @@ graph TB
 
     Clippy --> Rules
 
-    Pass{All Rules<br/>Pass?}
+    Pass{All Rules Pass?}
     Success([Success])
     Fix([Fix Issues])
 
@@ -321,9 +321,9 @@ ui-test-rs follows strict Test-Driven Development:
 
 ```mermaid
 flowchart LR
-    Red[🔴 RED<br/>Write Failing Test]
-    Green[🟢 GREEN<br/>Make Test Pass]
-    Refactor[🔵 REFACTOR<br/>Improve Code]
+    Red[🔴 RED Write Failing Test]
+    Green[🟢 GREEN Make Test Pass]
+    Refactor[🔵 REFACTOR Improve Code]
 
     Red --> Green
     Green --> Refactor
@@ -379,16 +379,16 @@ sequenceDiagram
 ```mermaid
 graph TB
     subgraph Constraints["Code Constraints"]
-        FileSize[File Size<br/>Max: 500 lines<br/>Prefer: 200-300]
-        FuncSize[Function Size<br/>Max: 50 lines<br/>Prefer: 10-30]
-        TODO[TODO Comments<br/>Max: 3 per file]
-        FIXME[FIXME Comments<br/>Never commit]
+        FileSize[File Size Max: 500 lines Prefer: 200-300]
+        FuncSize[Function Size Max: 50 lines Prefer: 10-30]
+        TODO[TODO Comments Max: 3 per file]
+        FIXME[FIXME Comments Never commit]
     end
 
     subgraph RustStandards["Rust Standards"]
-        Edition[Edition: 2021<br/>Idioms: 2024]
-        Inline[Inline format args<br/>format!"{name}"]
-        DocComments[Module docs: //!<br/>Item docs: ///]
+        Edition[Edition: 2021 Idioms: 2024]
+        Inline[Inline format args format!"{name}"]
+        DocComments[Module docs: //! Item docs: ///]
     end
 
     style Constraints fill:#ffecb3
@@ -400,10 +400,10 @@ graph TB
 ```mermaid
 flowchart TB
     Start([New Feature])
-    Check{File > 500<br/>lines?}
-    Split[Split into<br/>Multiple Files]
-    FuncCheck{Function > 50<br/>lines?}
-    Extract[Extract<br/>Helper Functions]
+    Check{File > 500 lines?}
+    Split[Split into Multiple Files]
+    FuncCheck{Function > 50 lines?}
+    Extract[Extract Helper Functions]
     Done([Implementation Complete])
 
     Start --> Check
@@ -440,12 +440,12 @@ pub fn example() {
 ```mermaid
 flowchart TB
     Start([New Feature Request])
-    Plan[Plan Implementation<br/>Update docs/plan.md]
-    Test[Write Tests<br/>RED phase]
-    Implement[Implement Feature<br/>GREEN phase]
-    Refactor[Refactor Code<br/>REFACTOR phase]
+    Plan[Plan Implementation Update docs/plan.md]
+    Test[Write Tests RED phase]
+    Implement[Implement Feature GREEN phase]
+    Refactor[Refactor Code REFACTOR phase]
     Quality[Run Quality Checks]
-    UpdateDocs[Update Documentation<br/>• README.md<br/>• docs/status.md]
+    UpdateDocs[Update Documentation • README.md • docs/status.md]
     Commit[Commit & Push]
     Done([Feature Complete])
 
@@ -467,11 +467,11 @@ flowchart TB
 ```mermaid
 flowchart TB
     Start([Bug Reported])
-    Reproduce[Write Failing Test<br/>Reproducing Bug]
-    Fix[Fix Bug<br/>Make Test Pass]
+    Reproduce[Write Failing Test Reproducing Bug]
+    Fix[Fix Bug Make Test Pass]
     Verify[Verify All Tests Pass]
     Quality[Run Quality Checks]
-    Document[Document in<br/>docs/learnings.md]
+    Document[Document in docs/learnings.md]
     Commit[Commit & Push]
     Done([Bug Fixed])
 
@@ -492,15 +492,15 @@ flowchart TB
 ```mermaid
 flowchart TB
     Start([Refactoring Needed])
-    EnsureTests[Ensure Tests Exist<br/>Add if missing]
-    RunTests[Run Tests<br/>All should pass]
+    EnsureTests[Ensure Tests Exist Add if missing]
+    RunTests[Run Tests All should pass]
     Refactor[Refactor Code]
     TestAgain[Run Tests Again]
-    Pass{Tests<br/>Pass?}
+    Pass{Tests Pass?}
     Quality[Run Quality Checks]
     Commit[Commit Changes]
     Done([Refactoring Complete])
-    Fix([Fix Broken Tests<br/>or Code])
+    Fix([Fix Broken Tests or Code])
 
     Start --> EnsureTests
     EnsureTests --> RunTests

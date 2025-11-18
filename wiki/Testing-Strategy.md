@@ -32,9 +32,9 @@ mindmap
 
 ```mermaid
 flowchart LR
-    Red[🔴 RED<br/>Write Failing Test<br/>Define Behavior]
-    Green[🟢 GREEN<br/>Make Test Pass<br/>Minimal Code]
-    Refactor[🔵 REFACTOR<br/>Improve Code<br/>Keep Tests Green]
+    Red[🔴 RED Write Failing Test Define Behavior]
+    Green[🟢 GREEN Make Test Pass Minimal Code]
+    Refactor[🔵 REFACTOR Improve Code Keep Tests Green]
 
     Red --> Green
     Green --> Refactor
@@ -52,10 +52,10 @@ graph TB
     TDD[Test-Driven Development]
 
     subgraph Benefits["Benefits"]
-        Design[Better Design<br/>Think before coding]
-        Confidence[Confidence<br/>Tests verify behavior]
-        Regression[Regression Safety<br/>Catch breaking changes]
-        Docs[Living Documentation<br/>Tests show usage]
+        Design[Better Design Think before coding]
+        Confidence[Confidence Tests verify behavior]
+        Regression[Regression Safety Catch breaking changes]
+        Docs[Living Documentation Tests show usage]
     end
 
     TDD --> Benefits
@@ -71,11 +71,11 @@ graph TB
 ```mermaid
 graph TB
     subgraph SourceFiles["Source Files with Tests"]
-        Config[config.rs<br/>#[cfg test] mod tests]
-        Loader[loader.rs<br/>#[cfg test] mod tests]
-        Runner[runner.rs<br/>#[cfg test] mod tests]
-        PW[playwright.rs<br/>#[cfg test] mod tests]
-        Reporter[reporter.rs<br/>#[cfg test] mod tests]
+        Config[config.rs #[cfg test] mod tests]
+        Loader[loader.rs #[cfg test] mod tests]
+        Runner[runner.rs #[cfg test] mod tests]
+        PW[playwright.rs #[cfg test] mod tests]
+        Reporter[reporter.rs #[cfg test] mod tests]
     end
 
     subgraph TestTypes["Unit Test Types"]
@@ -175,10 +175,10 @@ graph TB
     Component[Component]
 
     subgraph Coverage["Test Coverage Areas"]
-        HappyPath[Happy Path<br/>Normal operation]
-        EdgeCases[Edge Cases<br/>Boundary conditions]
-        Errors[Error Cases<br/>Invalid inputs]
-        Integration[Integration Points<br/>Component interactions]
+        HappyPath[Happy Path Normal operation]
+        EdgeCases[Edge Cases Boundary conditions]
+        Errors[Error Cases Invalid inputs]
+        Integration[Integration Points Component interactions]
     end
 
     Component --> Coverage
@@ -194,15 +194,15 @@ graph TB
 ```mermaid
 graph TB
     subgraph TestDir["tests/ directory"]
-        CLI[cli_tests.rs<br/>CLI argument tests]
-        E2E[e2e_tests.rs<br/>End-to-end flows]
-        Output[output_tests.rs<br/>Format validation]
+        CLI[cli_tests.rs CLI argument tests]
+        E2E[e2e_tests.rs End-to-end flows]
+        Output[output_tests.rs Format validation]
     end
 
     subgraph Tools["Testing Tools"]
-        AssertCmd[assert_cmd<br/>CLI testing]
-        Predicates[predicates<br/>Assertions]
-        TempFile[tempfile<br/>Temp directories]
+        AssertCmd[assert_cmd CLI testing]
+        Predicates[predicates Assertions]
+        TempFile[tempfile Temp directories]
     end
 
     CLI --> AssertCmd
@@ -307,13 +307,13 @@ sequenceDiagram
 ```mermaid
 graph TB
     subgraph PWTests["tests/playwright/"]
-        Browser[browser_tests.rs<br/>Browser lifecycle]
-        Actions[action_tests.rs<br/>Browser actions]
-        Elements[element_tests.rs<br/>Element selection]
+        Browser[browser_tests.rs Browser lifecycle]
+        Actions[action_tests.rs Browser actions]
+        Elements[element_tests.rs Element selection]
     end
 
     subgraph MCPServer["Playwright MCP"]
-        Server[MCP Server<br/>@playwright/mcp]
+        Server[MCP Server @playwright/mcp]
     end
 
     PWTests --> MCPServer
@@ -399,9 +399,9 @@ graph TB
 ```mermaid
 graph TB
     subgraph Pyramid["Testing Pyramid"]
-        E2E[End-to-End Tests<br/>Few, Slow, Expensive<br/>10%]
-        Integration[Integration Tests<br/>Moderate, Medium Speed<br/>20%]
-        Unit[Unit Tests<br/>Many, Fast, Cheap<br/>70%]
+        E2E[End-to-End Tests Few, Slow, Expensive 10%]
+        Integration[Integration Tests Moderate, Medium Speed 20%]
+        Unit[Unit Tests Many, Fast, Cheap 70%]
     end
 
     Unit --> Integration
@@ -417,12 +417,12 @@ graph TB
 ```mermaid
 graph LR
     subgraph Goals["Coverage Goals"]
-        Unit[Unit Tests<br/>90%+ coverage]
-        Integration2[Integration Tests<br/>Critical paths]
-        E2E2[E2E Tests<br/>Key workflows]
+        Unit[Unit Tests 90%+ coverage]
+        Integration2[Integration Tests Critical paths]
+        E2E2[E2E Tests Key workflows]
     end
 
-    Quality[High Quality<br/>Reliable Software]
+    Quality[High Quality Reliable Software]
 
     Goals --> Quality
 
@@ -438,12 +438,12 @@ graph LR
 flowchart TB
     Start([Commit Attempt])
 
-    Build{Build<br/>Passes?}
-    Test{Tests<br/>Pass?}
-    Clippy{Clippy<br/>Clean?}
+    Build{Build Passes?}
+    Test{Tests Pass?}
+    Clippy{Clippy Clean?}
     Fmt{Formatted?}
-    MD{Markdown<br/>Valid?}
-    SW{sw-checklist<br/>Passes?}
+    MD{Markdown Valid?}
+    SW{sw-checklist Passes?}
 
     Success([✓ Commit Allowed])
     Fail([✗ Fix Issues])

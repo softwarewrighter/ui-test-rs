@@ -6,11 +6,11 @@ The Reporter component (`reporter.rs`) is responsible for formatting and outputt
 
 ```mermaid
 flowchart TB
-    Reporter[Reporter<br/>reporter.rs]
+    Reporter[Reporter reporter.rs]
     Text[Text Reporter]
     Json[JSON Reporter]
     Junit[JUnit Reporter]
-    Output[Output<br/>stdout/files]
+    Output[Output stdout/files]
 
     Reporter --> Text
     Reporter --> Json
@@ -197,7 +197,7 @@ Exit code: 1
 ```mermaid
 flowchart TB
     Start([Format Text])
-    Header[Write Header<br/>'Running N tests from...']
+    Header[Write Header 'Running N tests from...']
 
     MoreTests{More Tests?}
     GetResult[Get Test Result]
@@ -210,7 +210,7 @@ flowchart TB
 
     WriteResult[Write Result Line]
 
-    AllDone{All Tests<br/>Reported?}
+    AllDone{All Tests Reported?}
 
     FormatFailures[Format Failure Details]
     FormatSummary[Format Summary Stats]
@@ -262,7 +262,7 @@ graph TB
     end
 
     Output[Console Output]
-    ColorEnabled{Color<br/>Enabled?}
+    ColorEnabled{Color Enabled?}
     Apply[Apply Colors]
     Plain[Plain Text]
 
@@ -379,14 +379,14 @@ classDiagram
 
 ```mermaid
 graph TB
-    TestSuites[testsuites<br/>Root Element]
-    TestSuite[testsuite<br/>Suite Element]
+    TestSuites[testsuites Root Element]
+    TestSuite[testsuite Suite Element]
 
-    TestCase1[testcase<br/>test_admin_login]
-    TestCase2[testcase<br/>test_add_to_cart]
-    TestCase3[testcase<br/>test_remove_item]
+    TestCase1[testcase test_admin_login]
+    TestCase2[testcase test_add_to_cart]
+    TestCase3[testcase test_remove_item]
 
-    Failure[failure<br/>Error Details]
+    Failure[failure Error Details]
 
     TestSuites --> TestSuite
     TestSuite --> TestCase1
@@ -410,7 +410,7 @@ graph TB
 ```mermaid
 flowchart TB
     Start([Calculate Statistics])
-    InitCounters[Initialize Counters<br/>total, passed, failed, etc.]
+    InitCounters[Initialize Counters total, passed, failed, etc.]
     StartTimer[Start Duration Timer]
 
     MoreResults{More Results?}
@@ -425,9 +425,9 @@ flowchart TB
 
     AddDuration[Add Test Duration]
 
-    CalcPassRate[Calculate Pass Rate<br/>passed / total]
-    CalcFailRate[Calculate Fail Rate<br/>failed / total]
-    CalcAvgDuration[Calculate Average Duration<br/>total_duration / total]
+    CalcPassRate[Calculate Pass Rate passed / total]
+    CalcFailRate[Calculate Fail Rate failed / total]
+    CalcAvgDuration[Calculate Average Duration total_duration / total]
 
     Done([Statistics Ready])
 
@@ -536,10 +536,10 @@ Error: Element not found: button[name="Add to Cart"]
 
 ```mermaid
 graph TB
-    VerboseMode{Verbose<br/>Enabled?}
+    VerboseMode{Verbose Enabled?}
 
-    Normal[Normal Output<br/>Pass/Fail Status Only]
-    Verbose[Verbose Output<br/>+ Test Details<br/>+ Actions Taken<br/>+ Timing Info]
+    Normal[Normal Output Pass/Fail Status Only]
+    Verbose[Verbose Output + Test Details + Actions Taken + Timing Info]
 
     VerboseMode -->|No| Normal
     VerboseMode -->|Yes| Verbose
@@ -567,7 +567,7 @@ ok (1.2s)
 ```mermaid
 flowchart LR
     Reporter[Reporter]
-    Format{Output<br/>Format?}
+    Format{Output Format?}
 
     Text[Text]
     Json[JSON]

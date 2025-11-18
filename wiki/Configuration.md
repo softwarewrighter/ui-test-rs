@@ -12,10 +12,10 @@ ui-test-rs uses a flexible multi-layered configuration system that allows settin
 flowchart TB
     subgraph Sources["Configuration Sources (Lowest to Highest Priority)"]
         direction TB
-        D[1. Default Values<br/>Hardcoded in application]
-        F[2. Config File<br/>ui-test.toml]
-        E[3. Environment Variables<br/>UI_TEST_*]
-        C[4. CLI Flags<br/>--verbose, etc.]
+        D[1. Default Values Hardcoded in application]
+        F[2. Config File ui-test.toml]
+        E[3. Environment Variables UI_TEST_*]
+        C[4. CLI Flags --verbose, etc.]
     end
 
     Final[Final Configuration]
@@ -184,7 +184,7 @@ mindmap
 flowchart TB
     Start([Config Resolution])
     LoadDefaults[Load Default Values]
-    CheckFile{Config File<br/>Specified?}
+    CheckFile{Config File Specified?}
     LoadFile[Load Config File]
     FileExists{File Exists?}
     Error[Fail with Error]
@@ -261,10 +261,10 @@ Result:      jobs = 8  (from environment)
 graph TB
     subgraph Priority["Configuration Priority"]
         direction TB
-        CLI[CLI Flags<br/>HIGHEST]
+        CLI[CLI Flags HIGHEST]
         Env[Environment Variables]
         File[Config File]
-        Default[Default Values<br/>LOWEST]
+        Default[Default Values LOWEST]
     end
 
     CLI -.->|overrides| Env
@@ -319,7 +319,7 @@ flowchart TB
     Start([Validate Config])
     CheckTimeout{Timeout > 0?}
     CheckJobs{Jobs > 0?}
-    CheckPatterns{Patterns<br/>non-empty?}
+    CheckPatterns{Patterns non-empty?}
     CheckFormat{Valid format?}
     CheckBrowser{Valid browser?}
     AllValid{All Valid?}
@@ -397,16 +397,16 @@ ui-test-rs --format json tests/ > results.json
 ```mermaid
 flowchart LR
     subgraph VCS["Version Control"]
-        ConfigFile[ui-test.toml<br/>Team Settings]
+        ConfigFile[ui-test.toml Team Settings]
     end
 
     subgraph CI["CI/CD"]
-        EnvVars[Environment Variables<br/>Build Settings]
+        EnvVars[Environment Variables Build Settings]
     end
 
     subgraph Local["Local Development"]
-        LocalEnv[.env file<br/>Personal Settings]
-        CLIFlags[CLI Flags<br/>Quick Overrides]
+        LocalEnv[.env file Personal Settings]
+        CLIFlags[CLI Flags Quick Overrides]
     end
 
     VCS -.-> CI
@@ -482,17 +482,17 @@ This will show:
 
 ```mermaid
 flowchart TB
-    Issue{Configuration<br/>Issue?}
+    Issue{Configuration Issue?}
 
-    NotFound[Config file<br/>not found]
+    NotFound[Config file not found]
     ParseError[Parse error]
     ValidationError[Validation error]
     PrecedenceIssue[Unexpected value]
 
-    CheckPath[Check file path<br/>and --config flag]
-    CheckSyntax[Check TOML syntax<br/>validate structure]
-    CheckValues[Check validation rules<br/>fix invalid values]
-    CheckPrecedence[Review precedence<br/>check all sources]
+    CheckPath[Check file path and --config flag]
+    CheckSyntax[Check TOML syntax validate structure]
+    CheckValues[Check validation rules fix invalid values]
+    CheckPrecedence[Review precedence check all sources]
 
     Issue -->|File Missing| NotFound
     Issue -->|Invalid TOML| ParseError

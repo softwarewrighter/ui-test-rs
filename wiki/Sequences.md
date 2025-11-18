@@ -69,7 +69,7 @@ flowchart TB
     MergeEnv[Merge Environment Variables]
     ApplyCLI[Apply CLI Overrides]
     ValidateConfig{Valid Config?}
-    ConfigError[Show Config Error<br/>Exit Code 2]
+    ConfigError[Show Config Error Exit Code 2]
     InitRunner[Initialize Test Runner]
     Success([Ready to Execute])
 
@@ -138,12 +138,12 @@ sequenceDiagram
 ```mermaid
 flowchart TB
     Start([Start Discovery])
-    GetPatterns[Get Glob Patterns<br/>*_test.rs, test_*.rs]
+    GetPatterns[Get Glob Patterns *_test.rs, test_*.rs]
     GlobFiles[Apply Glob to Path]
     MoreFiles{More Files?}
     ReadFile[Read File]
     ValidRust{Valid Rust?}
-    SkipFile[Skip File<br/>Log Warning]
+    SkipFile[Skip File Log Warning]
     ParseTests[Extract Test Functions]
     HasTests{Has Tests?}
     AddSuite[Add to Test Suite]
@@ -574,7 +574,7 @@ flowchart TB
     Retry[Retry Connection]
     FailTest[Mark Test Failed]
 
-    Fatal[Fatal Error<br/>Exit Code 2]
+    Fatal[Fatal Error Exit Code 2]
     Continue[Continue Execution]
 
     Error --> Classify

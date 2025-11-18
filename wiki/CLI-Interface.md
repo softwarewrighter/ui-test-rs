@@ -7,8 +7,8 @@ The CLI Interface component (`main.rs`) is the entry point of ui-test-rs, respon
 ```mermaid
 flowchart TB
     User([User])
-    CLI[CLI Interface<br/>main.rs]
-    Parser[Argument Parser<br/>clap]
+    CLI[CLI Interface main.rs]
+    Parser[Argument Parser clap]
     Validator[Input Validator]
     ConfigResolver[Config Resolver]
     Runner[Test Runner]
@@ -248,21 +248,21 @@ Repository: https://github.com/softwarewrighter/ui-test-rs
 flowchart TB
     Start([main])
     ParseArgs[Parse CLI Arguments]
-    SpecialCmd{Special<br/>Command?}
+    SpecialCmd{Special Command?}
     ShowHelp[Show Help]
     ShowVersion[Show Version]
     Exit0([Exit 0])
 
-    ValidateArgs{Valid<br/>Arguments?}
+    ValidateArgs{Valid Arguments?}
     ShowError[Show Error]
     Exit2([Exit 2])
 
     ResolveConfig[Resolve Configuration]
-    ConfigValid{Config<br/>Valid?}
+    ConfigValid{Config Valid?}
 
     InitRunner[Initialize Test Runner]
     RunTests[Execute Tests]
-    Results{Test<br/>Results?}
+    Results{Test Results?}
 
     AllPassed[All Tests Passed]
     SomeFailed[Some Tests Failed]
@@ -314,9 +314,9 @@ flowchart TB
 ```mermaid
 graph TB
     subgraph ExitCodes["Exit Codes"]
-        E0[0 - Success<br/>All tests passed]
-        E1[1 - Test Failures<br/>Some tests failed]
-        E2[2 - Error<br/>Configuration/Discovery/MCP error]
+        E0[0 - Success All tests passed]
+        E1[1 - Test Failures Some tests failed]
+        E2[2 - Error Configuration/Discovery/MCP error]
     end
 
     subgraph Scenarios["Example Scenarios"]
@@ -345,14 +345,14 @@ graph TB
 ```mermaid
 flowchart TB
     Start([Validate Input])
-    CheckPath{TEST_PATH<br/>exists?}
+    CheckPath{TEST_PATH exists?}
     PathError[Error: Path not found]
     CheckJobs{jobs > 0?}
     JobsError[Error: Jobs must be > 0]
-    CheckConfig{config file<br/>specified?}
-    ConfigExists{config file<br/>exists?}
+    CheckConfig{config file specified?}
+    ConfigExists{config file exists?}
     ConfigError[Error: Config file not found]
-    CheckFormat{format<br/>valid?}
+    CheckFormat{format valid?}
     FormatError[Error: Invalid format]
     Valid([Input Valid])
 

@@ -11,24 +11,24 @@ ui-test-rs follows a layered architecture with five main components that work to
 ```mermaid
 flowchart TB
     subgraph UserInterface["User Interface Layer"]
-        CLI[CLI Interface<br/>Argument Parsing<br/>Help/Version]
+        CLI[CLI Interface Argument Parsing Help/Version]
     end
 
     subgraph Orchestration["Orchestration Layer"]
-        Runner[Test Runner<br/>Lifecycle Management<br/>Result Collection]
+        Runner[Test Runner Lifecycle Management Result Collection]
     end
 
     subgraph Services["Service Layer"]
-        Loader[Test Loader<br/>Discovery<br/>Filtering]
-        PW[Playwright Client<br/>MCP Integration<br/>Browser Control]
-        Reporter[Reporter<br/>Formatting<br/>Output]
+        Loader[Test Loader Discovery Filtering]
+        PW[Playwright Client MCP Integration Browser Control]
+        Reporter[Reporter Formatting Output]
     end
 
     subgraph External["External Systems"]
-        MCPServer[Playwright MCP<br/>Server]
-        Browser[Browser<br/>Chromium/Firefox/WebKit]
-        TestFiles[(Test Files<br/>*_test.rs)]
-        Output[(Results<br/>Text/JSON/JUnit)]
+        MCPServer[Playwright MCP Server]
+        Browser[Browser Chromium/Firefox/WebKit]
+        TestFiles[(Test Files *_test.rs)]
+        Output[(Results Text/JSON/JUnit)]
     end
 
     CLI --> Runner
@@ -52,8 +52,8 @@ flowchart TB
 ```mermaid
 graph TB
     subgraph CLI["CLI Interface (main.rs)"]
-        ArgParser[Argument Parser<br/>clap derive]
-        Config[Config Resolver<br/>CLI + Env + File]
+        ArgParser[Argument Parser clap derive]
+        Config[Config Resolver CLI + Env + File]
     end
 
     subgraph Runner["Test Runner (runner.rs)"]
@@ -63,7 +63,7 @@ graph TB
     end
 
     subgraph Loader["Test Loader (loader.rs)"]
-        Discovery[File Discovery<br/>Glob Patterns]
+        Discovery[File Discovery Glob Patterns]
         Parser[Test Parser]
         Filter[Test Filter]
     end
@@ -71,7 +71,7 @@ graph TB
     subgraph PW["Playwright Client (playwright.rs)"]
         Connection[MCP Connection]
         Actions[Browser Actions]
-        Elements[Element Selection<br/>Accessibility Tree]
+        Elements[Element Selection Accessibility Tree]
     end
 
     subgraph Reporter["Reporter (reporter.rs)"]
@@ -109,11 +109,11 @@ graph TB
 
 ```mermaid
 flowchart LR
-    Defaults[Default<br/>Values]
-    File[Config File<br/>ui-test.toml]
-    Env[Environment<br/>Variables]
+    Defaults[Default Values]
+    File[Config File ui-test.toml]
+    Env[Environment Variables]
     CLI[CLI Flags]
-    Final[Final<br/>Configuration]
+    Final[Final Configuration]
 
     Defaults --> File
     File --> Env
@@ -227,14 +227,14 @@ graph LR
 ```mermaid
 flowchart TB
     subgraph Isolated["Isolated Components"]
-        CLI2[CLI Interface<br/>✓ No external deps]
-        Loader2[Test Loader<br/>✓ Filesystem only]
-        Reporter2[Reporter<br/>✓ Pure formatting]
+        CLI2[CLI Interface ✓ No external deps]
+        Loader2[Test Loader ✓ Filesystem only]
+        Reporter2[Reporter ✓ Pure formatting]
     end
 
     subgraph Integrated["Integrated Components"]
-        Runner2[Test Runner<br/>⊕ Orchestrates all]
-        PW2[Playwright Client<br/>⊕ External MCP]
+        Runner2[Test Runner ⊕ Orchestrates all]
+        PW2[Playwright Client ⊕ External MCP]
     end
 
     Runner2 -.-> CLI2
@@ -313,12 +313,12 @@ flowchart TB
     Queue[Test Queue]
 
     subgraph Workers["Worker Pool (Configurable Size)"]
-        W1[Worker 1<br/>Browser Instance]
-        W2[Worker 2<br/>Browser Instance]
-        W3[Worker N<br/>Browser Instance]
+        W1[Worker 1 Browser Instance]
+        W2[Worker 2 Browser Instance]
+        W3[Worker N Browser Instance]
     end
 
-    Collector[Result Collector<br/>Thread-Safe]
+    Collector[Result Collector Thread-Safe]
     Reporter[Reporter]
 
     Queue --> W1
@@ -374,13 +374,13 @@ flowchart TB
     end
 
     subgraph Limited["Limited Trust Zone"]
-        Loader3[Test Loader<br/>Path Validation]
-        TestFiles3[Test Files<br/>Resource Limits]
+        Loader3[Test Loader Path Validation]
+        TestFiles3[Test Files Resource Limits]
     end
 
     subgraph Sandboxed["Sandboxed Zone"]
-        Browser3[Browser<br/>Isolated Process]
-        MCP3[MCP Server<br/>Subprocess]
+        Browser3[Browser Isolated Process]
+        MCP3[MCP Server Subprocess]
     end
 
     CLI3 --> Config3
@@ -429,7 +429,7 @@ mindmap
 flowchart TB
     subgraph Build["Build Artifacts"]
         Binary[ui-test-rs Binary]
-        Metadata[Build Metadata<br/>Host/Commit/Timestamp]
+        Metadata[Build Metadata Host/Commit/Timestamp]
     end
 
     subgraph Distribution["Distribution Methods"]
@@ -439,9 +439,9 @@ flowchart TB
     end
 
     subgraph Runtime["Runtime Requirements"]
-        Rust[Rust Toolchain<br/>Build Only]
-        Node[Node.js v20+<br/>Playwright MCP]
-        PW_MCP[Playwright MCP<br/>@playwright/mcp]
+        Rust[Rust Toolchain Build Only]
+        Node[Node.js v20+ Playwright MCP]
+        PW_MCP[Playwright MCP @playwright/mcp]
     end
 
     Binary --> CargoInstall
@@ -469,8 +469,8 @@ flowchart TB
     Core[Core System]
 
     subgraph Plugins["Plugin System"]
-        Interface[Plugin Interface<br/>Trait]
-        Loader4[Plugin Loader<br/>Dynamic]
+        Interface[Plugin Interface Trait]
+        Loader4[Plugin Loader Dynamic]
         Registry[Plugin Registry]
     end
 

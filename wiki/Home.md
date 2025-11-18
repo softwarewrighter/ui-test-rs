@@ -54,11 +54,11 @@ ui-test-rs --format json tests/
 
 ```mermaid
 flowchart TB
-    CLI[CLI Interface<br/>main.rs]
-    Runner[Test Runner<br/>runner.rs]
-    Loader[Test Loader<br/>loader.rs]
-    PW[Playwright Client<br/>playwright.rs]
-    Reporter[Reporter<br/>reporter.rs]
+    CLI[CLI Interface main.rs]
+    Runner[Test Runner runner.rs]
+    Loader[Test Loader loader.rs]
+    PW[Playwright Client playwright.rs]
+    Reporter[Reporter reporter.rs]
 
     CLI --> Runner
     Runner --> Loader
@@ -66,8 +66,8 @@ flowchart TB
     Runner --> Reporter
 
     Loader -.-> TestFiles[(Test Files)]
-    PW -.-> Browser[Browser<br/>Actions]
-    Reporter -.-> Output[Results<br/>Output]
+    PW -.-> Browser[Browser Actions]
+    Reporter -.-> Output[Results Output]
 
     style CLI fill:#e1f5ff
     style Runner fill:#fff4e1

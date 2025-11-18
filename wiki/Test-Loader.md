@@ -6,7 +6,7 @@ The Test Loader component (`loader.rs`) is responsible for discovering test file
 
 ```mermaid
 flowchart TB
-    Loader[Test Loader<br/>loader.rs]
+    Loader[Test Loader loader.rs]
     FS[File System]
     Parser[Test Parser]
     Filter[Test Filter]
@@ -91,25 +91,25 @@ classDiagram
 ```mermaid
 flowchart TB
     Start([Start Discovery])
-    GetPatterns[Get Glob Patterns<br/>*_test.rs, test_*.rs]
+    GetPatterns[Get Glob Patterns *_test.rs, test_*.rs]
     ApplyGlob[Apply Glob to Root Path]
-    MoreFiles{More<br/>Files?}
+    MoreFiles{More Files?}
 
     ReadFile[Read File Content]
-    CheckExclude{Matches<br/>Exclude?}
+    CheckExclude{Matches Exclude?}
     SkipFile[Skip File]
 
-    ValidRust{Valid Rust<br/>Syntax?}
-    WarnInvalid[Log Warning<br/>Skip File]
+    ValidRust{Valid Rust Syntax?}
+    WarnInvalid[Log Warning Skip File]
 
     ParseFile[Parse File for Tests]
-    HasTests{Has Test<br/>Functions?}
+    HasTests{Has Test Functions?}
     SkipEmpty[Skip Empty File]
 
     CreateSuite[Create Test Suite]
     AddToResults[Add to Results]
 
-    AllDone{All Files<br/>Processed?}
+    AllDone{All Files Processed?}
     SortSuites[Sort Suites by Path]
     Done([Return Test Suites])
 
@@ -202,9 +202,9 @@ sequenceDiagram
 ```mermaid
 graph TB
     subgraph Patterns["Discovery Patterns"]
-        P1[*_test.rs<br/>Suffix Pattern]
-        P2[test_*.rs<br/>Prefix Pattern]
-        P3[tests/**/*.rs<br/>Directory Pattern]
+        P1[*_test.rs Suffix Pattern]
+        P2[test_*.rs Prefix Pattern]
+        P3[tests/**/*.rs Directory Pattern]
     end
 
     subgraph Examples["File Examples"]
@@ -265,10 +265,10 @@ flowchart TB
     Start([File Content])
     Tokenize[Tokenize Rust Code]
     FindFunctions[Find Function Definitions]
-    MoreFuncs{More<br/>Functions?}
+    MoreFuncs{More Functions?}
 
     CheckAttrs[Check Attributes]
-    HasTestAttr{Has #[test]<br/>or #[test_case]?}
+    HasTestAttr{Has #[test] or #[test_case]?}
     SkipFunc[Skip Function]
 
     ExtractName[Extract Function Name]
@@ -360,14 +360,14 @@ classDiagram
 flowchart TB
     AllTests[All Discovered Tests]
 
-    Filter{Filter<br/>Applied?}
+    Filter{Filter Applied?}
 
     NameFilter[Name Pattern Filter]
     TagFilter[Tag Filter]
     NoFilter[No Filter]
 
-    MatchName[Match Test Name<br/>Against Pattern]
-    MatchTag[Match Test Tags<br/>Against Filter]
+    MatchName[Match Test Name Against Pattern]
+    MatchTag[Match Test Tags Against Filter]
 
     FilteredTests[Filtered Test Set]
 
@@ -424,9 +424,9 @@ flowchart LR
     Start([Filter Tests])
     Pattern[Get Filter Pattern]
 
-    Loop{More<br/>Tests?}
+    Loop{More Tests?}
     GetTest[Get Next Test]
-    Match{Name<br/>Matches?}
+    Match{Name Matches?}
 
     KeepTest[Keep Test]
     SkipTest[Skip Test]
@@ -496,8 +496,8 @@ flowchart TB
 
     Recover{Recoverable?}
 
-    LogWarning[Log Warning<br/>Continue]
-    FailDiscovery[Fail Discovery<br/>Exit Code 2]
+    LogWarning[Log Warning Continue]
+    FailDiscovery[Fail Discovery Exit Code 2]
 
     Error --> Type
 
@@ -591,13 +591,13 @@ let filtered = loader.apply_filter(suites, "login");
 ```mermaid
 flowchart TB
     Start([Validate Suite])
-    CheckEmpty{Suite<br/>Empty?}
+    CheckEmpty{Suite Empty?}
     EmptyError[Error: No tests found]
 
-    CheckDuplicates{Duplicate<br/>Names?}
+    CheckDuplicates{Duplicate Names?}
     DuplicateError[Error: Duplicate test names]
 
-    CheckValid{Valid Test<br/>Signatures?}
+    CheckValid{Valid Test Signatures?}
     SignatureError[Error: Invalid test signature]
 
     Valid([Suite Valid])

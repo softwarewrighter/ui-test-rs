@@ -6,9 +6,9 @@ The Playwright Client component (`playwright.rs`) manages the connection to the 
 
 ```mermaid
 flowchart TB
-    Client[Playwright Client<br/>playwright.rs]
-    MCP[MCP Server<br/>@playwright/mcp]
-    Browser[Browser<br/>Chromium/Firefox/WebKit]
+    Client[Playwright Client playwright.rs]
+    MCP[MCP Server @playwright/mcp]
+    Browser[Browser Chromium/Firefox/WebKit]
     ATree[Accessibility Tree]
 
     Client <--> MCP
@@ -197,7 +197,7 @@ sequenceDiagram
 sequenceDiagram
     participant Test
     participant Client
-    participant Snapshot as Accessibility<br/>Snapshot
+    participant Snapshot as Accessibility Snapshot
     participant MCP
     participant Browser
 
@@ -269,19 +269,19 @@ sequenceDiagram
 graph TB
     Root[Page Root]
 
-    Header[Header<br/>role: banner]
-    Nav[Navigation<br/>role: navigation]
-    Main[Main Content<br/>role: main]
+    Header[Header role: banner]
+    Nav[Navigation role: navigation]
+    Main[Main Content role: main]
 
-    Logo[Logo<br/>role: img, name: 'Company Logo']
-    Menu[Menu<br/>role: menu]
+    Logo[Logo role: img, name: 'Company Logo']
+    Menu[Menu role: menu]
 
-    Title[Title<br/>role: heading, name: 'Login']
-    Form[Form<br/>role: form]
+    Title[Title role: heading, name: 'Login']
+    Form[Form role: form]
 
-    Username[Input<br/>role: textbox, name: 'Username']
-    Password[Input<br/>role: textbox, name: 'Password']
-    Submit[Button<br/>role: button, name: 'Submit']
+    Username[Input role: textbox, name: 'Username']
+    Password[Input role: textbox, name: 'Password']
+    Submit[Button role: button, name: 'Submit']
 
     Root --> Header
     Root --> Nav
@@ -335,14 +335,14 @@ flowchart TB
     ParseSelector[Parse Selector String]
     GetSnapshot[Get Accessibility Snapshot]
 
-    CheckType{Selector<br/>Type?}
+    CheckType{Selector Type?}
 
     RoleMatch[Match by Role + Name]
     AriaMatch[Match by ARIA Attributes]
     TextMatch[Match by Text Content]
     CSSMatch[Match by CSS Selector]
 
-    Found{Element<br/>Found?}
+    Found{Element Found?}
     Success([Return Element])
     NotFound([Error: Element Not Found])
 
@@ -464,10 +464,10 @@ flowchart TB
     Recover{Recoverable?}
 
     Retry[Retry Command]
-    RetryCount{Retry<br/>Limit?}
-    TakeScreenshot[Take Screenshot<br/>for Debug]
+    RetryCount{Retry Limit?}
+    TakeScreenshot[Take Screenshot for Debug]
     FailTest[Fail Test]
-    FatalError[Fatal Error<br/>Exit]
+    FatalError[Fatal Error Exit]
 
     Error --> Type
 
@@ -599,10 +599,10 @@ struct Viewport {
 ```mermaid
 graph TB
     subgraph Pool["Browser Pool"]
-        B1[Browser 1<br/>Available]
-        B2[Browser 2<br/>In Use]
-        B3[Browser 3<br/>Available]
-        B4[Browser 4<br/>In Use]
+        B1[Browser 1 Available]
+        B2[Browser 2 In Use]
+        B3[Browser 3 Available]
+        B4[Browser 4 In Use]
     end
 
     subgraph Workers["Workers"]
@@ -663,11 +663,11 @@ flowchart TB
     end
 
     subgraph Sandboxed["Sandboxed Zone"]
-        MCP2[MCP Server<br/>Subprocess]
-        Browser2[Browser<br/>Isolated Process]
+        MCP2[MCP Server Subprocess]
+        Browser2[Browser Isolated Process]
     end
 
-    Client2 <-.->|JSON-RPC<br/>stdin/stdout| MCP2
+    Client2 <-.->|JSON-RPC stdin/stdout| MCP2
     MCP2 <-.->|Playwright API| Browser2
 
     style Trusted fill:#c8e6c9

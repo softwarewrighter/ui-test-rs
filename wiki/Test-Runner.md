@@ -6,7 +6,7 @@ The Test Runner component (`runner.rs`) orchestrates the entire test execution l
 
 ```mermaid
 flowchart TB
-    Runner[Test Runner<br/>runner.rs]
+    Runner[Test Runner runner.rs]
     Loader[Test Loader]
     PW[Playwright Client]
     Reporter[Reporter]
@@ -281,10 +281,10 @@ graph TB
 ```mermaid
 flowchart TB
     Start([Test Selected])
-    Setup[Setup Phase<br/>before_each]
-    Execute[Execute Phase<br/>Run test function]
-    Assert[Assert Phase<br/>Check expectations]
-    Cleanup[Cleanup Phase<br/>after_each]
+    Setup[Setup Phase before_each]
+    Execute[Execute Phase Run test function]
+    Assert[Assert Phase Check expectations]
+    Cleanup[Cleanup Phase after_each]
     Collect[Collect Result]
     Done([Test Complete])
 
@@ -347,7 +347,7 @@ flowchart TB
     Timer[Start Timeout Timer]
     Execute[Execute Test]
 
-    Race{Which<br/>Completes?}
+    Race{Which Completes?}
 
     TestDone[Test Completes]
     Timeout[Timeout Fires]
@@ -404,7 +404,7 @@ async fn execute_with_timeout(
 flowchart TB
     Start([Test Results Ready])
     InitStats[Initialize Statistics]
-    MoreResults{More<br/>Results?}
+    MoreResults{More Results?}
     GetResult[Get Next Result]
     UpdateStats[Update Statistics]
     CheckStatus{Status?}
@@ -488,7 +488,7 @@ flowchart TB
     RecoverTest{Fail Fast?}
     RecoverMCP{Retry?}
 
-    MarkFailed[Mark Test Failed<br/>Continue]
+    MarkFailed[Mark Test Failed Continue]
     StopAll[Stop All Tests]
     RetryMCP[Retry Connection]
     Exit[Exit with Error]
@@ -523,13 +523,13 @@ flowchart TB
 ```mermaid
 flowchart TB
     Start([Test Execution Complete])
-    CheckErrors{Any Fatal<br/>Errors?}
+    CheckErrors{Any Fatal Errors?}
     Exit2([Exit Code 2])
 
-    CheckFailed{Any Test<br/>Failures?}
+    CheckFailed{Any Test Failures?}
     Exit1([Exit Code 1])
 
-    AllPassed{All Tests<br/>Passed?}
+    AllPassed{All Tests Passed?}
     Exit0([Exit Code 0])
 
     Start --> CheckErrors
@@ -553,14 +553,14 @@ flowchart TB
 ```mermaid
 graph TB
     subgraph WorkerPool["Worker Pool"]
-        W1[Worker 1<br/>Browser Instance 1]
-        W2[Worker 2<br/>Browser Instance 2]
-        W3[Worker 3<br/>Browser Instance 3]
-        W4[Worker 4<br/>Browser Instance 4]
+        W1[Worker 1 Browser Instance 1]
+        W2[Worker 2 Browser Instance 2]
+        W3[Worker 3 Browser Instance 3]
+        W4[Worker 4 Browser Instance 4]
     end
 
     Queue[Test Queue]
-    Semaphore[Semaphore<br/>Max: 4]
+    Semaphore[Semaphore Max: 4]
 
     Queue -.-> Semaphore
     Semaphore --> W1
@@ -568,7 +568,7 @@ graph TB
     Semaphore --> W3
     Semaphore --> W4
 
-    W1 -.-> Results[Results<br/>Collector]
+    W1 -.-> Results[Results Collector]
     W2 -.-> Results
     W3 -.-> Results
     W4 -.-> Results
